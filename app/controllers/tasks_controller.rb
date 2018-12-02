@@ -2,6 +2,10 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
     @tasks = Task.all
+    if logged_in?
+      @task = current_user.microposts.build  # form_for 用
+      @tasks = current_user.microposts.order('created_at DESC').page(params[:page])
+    end
   end
   
   def show
