@@ -61,4 +61,10 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:content, :status)
   end
+  
+  def require_user_logged_in
+    unless logged_in?
+      redirect_to login_url
+    end
+  end
 end
