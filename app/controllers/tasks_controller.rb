@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :require_user_logged_in
   def index
     if logged_in?
       @task = current_user.tasks.build  # form_for 用
